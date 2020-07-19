@@ -2,15 +2,19 @@
 pragma solidity >=0.4.25 <0.7.0;
 
 contract hello{
-    bytes32 name;
-    address owner;
-    constructor(bytes32 _name) public{
-        name = _name;
-        owner = msg.sender;
+    string private name;
+    address private owner;
 
+    constructor () public {
+        owner = msg.sender;
     }
 
-    function getName() public view returns(bytes32){
+    function setName (string memory _name) public {
+    require (msg.sender == owner, "You are not the owner!");
+    name = _name;
+    }
+
+    function getName () public view returns (string memory) {
         return name;
     }
 }
